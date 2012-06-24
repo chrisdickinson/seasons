@@ -1,0 +1,19 @@
+.seasons { -moz-transform:translateZ(0); -ms-transform:translateZ(0); -o-transform:translateZ(0); -webkit-transform:translateZ(0); transform:translateZ(0); }
+.seasons .seasons-line { transition:top 0.5s linear; -ms-transition:top 0.5s linear; -o-transition:top 0.5s linear; -moz-transition:top 0.5s linear; -webkit-transition:top 0.5s linear; position:absolute; top:0px; left:20px; }
+
+.seasons-line.active { display:block; }
+.seasons-line.inactive { display:none !important; }
+
+.seasons-line:before { 
+  content:attr(data-line);
+  color:#666;
+  display:inline-block;
+  visibility:visible;
+  width:0px;
+  left:-20px;
+  position:relative;
+}
+
+.seasons-keyword { color:#336633; }
+.seasons-literal { color:#660000; }
+.seasons-comment { color:#666666; font-style:italic; }
