@@ -1,5 +1,5 @@
-.seasons { -webkit-transform:translateZ(0); }
-.seasons .seasons-line { -webkit-transition:top 0.5s linear; position:absolute; top:0px; left:20px; }
+.seasons { -moz-transform:translateZ(0); -ms-transform:translateZ(0); -o-transform:translateZ(0); -webkit-transform:translateZ(0); transform:translateZ(0); }
+.seasons .seasons-line { transition:top 0.5s linear; -ms-transition:top 0.5s linear; -o-transition:top 0.5s linear; -moz-transition:top 0.5s linear; -webkit-transition:top 0.5s linear; position:absolute; top:0px; left:20px; }
 
 .seasons-line.active { display:block; }
 .seasons-line.inactive { display:none !important; }
