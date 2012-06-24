@@ -1,0 +1,19 @@
+{
+  "author": "Chris Dickinson <chris@neversaw.us> (http://github.com/chrisdickinson/)",
+  "name": "seasons",
+  "description": "generate and display changes in code across commits",
+  "version": "0.0.1",
+  "homepage": "http://github.com/chrisdickinson/seasons/",
+  "repository": {
+    "url": "git://github.com/chrisdickinson/seasons.git"
+  },
+  "main": "lib/seasons.js",
+  "dependencies": {
+    "d3": "~2.9.4"
+  },
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  }
+}

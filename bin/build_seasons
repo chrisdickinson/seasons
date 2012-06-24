@@ -1,0 +1,73 @@
+#!/bin/bash
+
+pushd `pwd`
+
+file=$1
+dir=`dirname $file`
+cd $dir
+
+abspath=`pwd`
+
+while [ ! -d ./.git ]; do
+    cd ..
+done
+
+dir=`pwd`
+local=`echo $abspath | sed -e "s:$dir:.:g"`/`basename $file`
+
+commits=`git log --pretty=format:%H $local`
+i=0
+results=""
+
+for commit in $commits; do
+    data=`git show $commit:$local`
+    msg=`git log --pretty=format:%B $commit...$commit~1`
+
+    result=`echo "$commit:::$msg:::$data:::$i" | node -e "
+        data = []
+        process.stdin.on('data', data.push.bind(data))
+        process.stdin.on('end', ready)
+        process.stdin.resume()
+
+        function ready() {
+            data = data.join('').split(':::')
+            commit = data[0]
+            msg = data[1]
+            file = data[2]
+            idx = data[3]
+
+            data = {idx:~~idx, commit:commit, msg:msg, data:file.split('\n')}
+            process.stdout.write(JSON.stringify(data))
+        }
+    "`
+
+    results="$result,$results"
+    i=$(($i + 1))
+    echo $i
+done
+
+popd
+
+echo "$results" | node -e "
+    data = []
+    process.stdin.on('data', data.push.bind(data))
+    process.stdin.on('end', ready)
+    process.stdin.resume()
+
+    function ready() {
+
+        data = JSON.parse('['+data.join('').slice(0, -2)+']').reverse()
+        var crypto = require('crypto')
+          , fs = require('fs')
+
+        data.forEach(function(commit) {
+            var lines = commit.data
+            commit.data = lines.map(function(line, idx) {
+                var hash = crypto.createHash('sha1').update(line.slice().trim()).digest('hex')
+                return {'hash':hash, 'line':line, 'num':idx+1}
+            })
+        })
+
+        fs.writeFileSync('output.json', JSON.stringify(data))
+    }
+"

@@ -1,0 +1,18 @@
+.seasons { -webkit-transform:translateZ(0); }
+.seasons .seasons-line { -webkit-transition:top 0.5s linear; position:absolute; top:0px; left:20px; }
+
+.seasons-line.active { display:block; }
+.seasons-line.inactive { display:none !important; }
+
+.seasons-line:before { 
+  content:attr(data-line);
+  color:#666;
+  display:inline-block;
+  visibility:visible;
+  width:0px;
+  left:-20px;
+  position:relative;
+}
+
+.seasons-keyword { color:#336633; }
+.seasons-literal { color:#660000; }
