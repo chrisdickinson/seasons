@@ -11,6 +11,9 @@
   "dependencies": {
     "d3": "~2.9.4"
   },
+  "bin" : {
+    "build_seasons" : "./bin/build_seasons"
+  },
   "devDependencies": {},
   "optionalDependencies": {},
   "engines": {
