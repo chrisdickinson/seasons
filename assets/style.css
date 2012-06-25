@@ -10,8 +10,8 @@
   display:inline-block;
   visibility:visible;
   width:0px;
-  left:-20px;
-  position:relative;
+  left:0px;
+  position:absolute;
 }
 
 .seasons-keyword { color:#336633; }
